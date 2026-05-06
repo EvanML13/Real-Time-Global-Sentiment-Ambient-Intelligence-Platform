@@ -1,3 +1,2 @@
-.env
-*.env
+.env*
 api/Real-Time-Global-Sentiment-Ambient-Intelligence-Platform
