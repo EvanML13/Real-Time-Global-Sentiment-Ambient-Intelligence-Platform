@@ -20,5 +20,13 @@
   --color-boarder: #33302a; /* Dark Bronze Edge */
 
   /* Sentiment Colors */
+  --color-calm: #5B9BD5;  /* Dodger Blue */
+  --color-curious: #7AC74F; /* Lime-Leaning Green */
+  --color-excited: #00C2FF; /* Electric Cyan-Blue */
+  --color-anxious: #E0812E; /* Burnt Amber-Orange */
+  --color-angry: #E22C22;  /* Blaze Red */
+  --color-grieving: #9BA3B0;  /* Faded Slate Blue-Grey */
+  --color-hopeful: #4FD8A0; /* Teal-Leaning Mint */
+  --color-frustrated: #F0D23D;  /* Bright Golden Yellow */
 }
 
