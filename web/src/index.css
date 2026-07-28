@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 :root {
-
   /* Surfaces */
   --color-bg-primary: #0e0d0b;  /* Near-Black Basalt */
   --color-bg-secondary: #171511;  /* Charcoal Marble */
@@ -17,7 +16,7 @@
   --color-text-tertiary: #6b6459;   /* Faded Stone - Timestamps, Captions, Labels */
 
   /* Border */
-  --color-boarder: #33302a; /* Dark Bronze Edge */
+  --color-border: #33302a; /* Dark Bronze Edge */
 
   /* Sentiment Colors */
   --color-calm: #5B9BD5;  /* Dodger Blue */
@@ -30,3 +29,24 @@
   --color-frustrated: #F0D23D;  /* Bright Golden Yellow */
 }
 
+/* Remove Any Padding */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Set Page View */
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow: hidden; /* No Scroll */
+}
+
+/* Inner Panel Scrolling */
+.scrollable {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
