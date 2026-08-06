@@ -11,12 +11,12 @@ export interface RegionSentiment {
     region_id: number
     valence: number
     arousal: number
-    dominant_emotion: number
+    dominant_emotion: string
 }
 
 export interface RegionWeather {
     region_id: number
-    temperarure_c: number
+    temperature_c: number
     wind_speed_kmh: number
     condition_text: string
     is_day: boolean
