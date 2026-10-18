@@ -74,7 +74,7 @@ export function sentimentToColor(
 export const DEFAULT_REGION_COLOR = 'hsl(220, 15%, 20%)'
 
 // Ocean/Background Color
-export const GLOBE_OCREAN_COLOR = 'hsl(220, 40%, 8%)'
+export const GLOBE_OCEAN_COLOR = 'hsl(220, 40%, 8%)'
 
 // Grid Lines Color 
 export const GRID_LINES_COLOR = 'hsl(220, 20%, 15%)'
