@@ -12,7 +12,7 @@ interface UIState {
 }
 
 // Constructor For UI State
-export const useUIState = create<UIState>((set) => ({
+export const useUIStore = create<UIState>((set) => ({
     selectedRegionId: null,
     setSelectedRegionId: (id) => set( { selectedRegionId: id }),
 

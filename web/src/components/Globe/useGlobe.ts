@@ -13,7 +13,7 @@ interface UseGlobeOptions {
 }
 
 interface GlobeState {
-    svgRef: React.RefObject<SVGAElement | null>
+    svgRef: React.RefObject<SVGSVGElement | null>
     redraw: (
         regions: Region[],
         sentimentColors: Record<number, string>,
@@ -25,7 +25,7 @@ interface GlobeState {
 export function useGlobe({ width, height, onRegionClick }: UseGlobeOptions): GlobeState {
 
     // Store The Raw SVG Element - useRef To Draw Circles, Lines, And Map Countries Inside Of It 
-    const svgRef = useRef<SVGAElement | null>(null)
+    const svgRef = useRef<SVGSVGElement | null>(null)
 
     // Store Cartography Math Engines - useRef To Prevent Internal Settings That Change During Rotation From Rerendering 
     const projectionRef = useRef<d3geo.GeoProjection | null>(null)

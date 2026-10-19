@@ -1,13 +1,16 @@
 import { useEffect } from 'react'
 import { WebSocketProvider } from './context/WebSocketContext'
 import { useWorldStore } from './store/worldStore'
+import { useUIStore } from './store/uiStore'
+import { Globe } from './components/Globe/globe'
 import type { Region } from './types/region'
 
 function AppInner() {
 
   const setRegion = useWorldStore((s) => s.setRegions)
+  const selectedRegionId = useUIStore((s) => s.selectedRegionId)
+  const setSelectedRegionId = useUIStore((s) => s.setSelectedRegionId)
   const regions = useWorldStore((s) => s.regions)
-  const sentiment = useWorldStore((s) => s.sentiment)
 
   // Load Regions On Startup
   useEffect(() => {
@@ -17,51 +20,62 @@ function AppInner() {
       .then((err) => console.log("Failed To Load Region:", err))
   }, [])
 
-  // Returned Styled HTML
-  return (
-    <div style={{ padding: '2rem', color: 'var(--color-text-primary)' }}>
-      <h1 style={{ marginBottom: '1rem', color: 'var(--color-accent-gold)' }}>
-        Atmora
-      </h1>
-      <p style={{ color: 'var(--color-text-secondary)', marginBottom: '2rem' }}>
-        Backend Connected - {regions.length} regions loaded
-      </p>
+  const selectedRegion = regions.find((r) => r.id === selectedRegionId)
 
-      {/* Live Sentiment Data As A Sanity Check Before Building The Globe */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem' }}>
-        {regions.map((region) => {
-          const s = sentiment[region.id]
-          return (
-            <div 
-              key={region.id}
+  return (
+    <div style={{ 
+      display: 'flex',
+      height: '100vh',
+      width: '100vw',
+      alignItems: 'center',
+      background: 'var(--color-bg-primary)',
+      overflow: 'hidden',
+    }}>
+
+      {/* Globe: Always Visible, Centered Or Shifted Left When Panel Is Open */}
+      <div style={{
+        flex: 1,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        transition: 'all 0.4s ease',
+      }}>
+        <Globe />
+      </div>
+
+      {/* Pulse Panel: Slides In From The Right When A Region Is Selected */}
+      { selectedRegion && (
+        <div style={{ 
+          width: '380px',
+          height: '100vh',
+          background: 'var(--color-bg-secondary)',
+          borderLeft: '1px solid var(--color-border)',
+          padding: '1.5rem',
+          overflowY: 'auto',
+          animation: 'slideIn 0.3s ease',
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+            <h2 style={{ color: 'var(--color-text-primary)', fontSize: '1.1rem'}}>
+              {selectedRegion?.name}
+            </h2>
+            <button
+              onClick={() => setSelectedRegionId(null)}
               style={{
-                background: 'var(--color-bg-secondary)',
-                border: '1px solid var(--color-border)',
-                borderRadius: '8px',
-                padding: '1rem',
+                background: 'none',
+                border: 'none',
+                color: 'var(--color-text-tertiary)',
+                cursor: 'pointer',
+                fontSize: '1.2rem',
               }}
             >
-              <div style={{ fontWeight: 600, marginBottom: '0.5rem' }}>
-                {region.name}
-              </div>
-              {s ? (
-                <>
-                  <div style={{ color: 'var(--color-text-secondary)', fontSize: '0.85rem' }}>
-                    {s.dominant_emotion}
-                  </div>
-                  <div style={{ color: 'var(----color-text-tertiary)', fontSize: '0.75rem', marginTop: '0.25rem' }}>
-                    valence {s.valence.toFixed(2)} · arousal {s.arousal.toFixed(2)}
-                  </div>
-                </>
-              ) : (
-                <div style={{ color: 'var(----color-text-tertiary)', fontSize: '0.85rem' }}>
-                  waiting for data...
-                </div>
-              )}
-            </div>
-          )
-        })}
-      </div>
+              x
+            </button>
+          </div>
+          <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.85rem' }}>
+            Pulse Panel Up Next...
+          </p>
+        </div>
+      )}
     </div>
   )
 }
