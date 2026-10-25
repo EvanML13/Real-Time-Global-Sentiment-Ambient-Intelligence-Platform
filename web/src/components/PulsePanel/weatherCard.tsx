@@ -100,4 +100,43 @@ const nightConditionIcons: Record<string, IconType> = {
     'Thunderstorm With Heavy Hail':     WiNightThunderstorm,      
 }
 
+export function WeatherCard({ weather }: WeatherCardProps) {
 
+    // If Its Day Use The Day Condition Icons If Its Night Merge The Day Condition Icons With The Night Condition Icons 
+    const iconMap: Record<string, IconType> = weather.is_day
+        ? dayConditionIcons
+        : { ...dayConditionIcons, ...nightConditionIcons }
+    // If The Condition Does Not Match The Map Fall Back To The Sunny Icon For Day And Clear Icon For Night
+    const WeatherIcon = iconMap[weather.condition_text] ?? (weather.is_day ? WiDaySunny : WiNightClear)
+
+    return (
+        <div style={{
+            background: 'var(--color-bg-tertiary)',
+            border: '1px solid var(--color-border)',
+            borderRadius: '8px',
+            padding: '0.875rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem',
+        }}>
+            <WeatherIcon size={48} color='var(--color-text-secondary)' />
+            <div>
+                <div style={{
+                    fontSize: '1.4rem',
+                    fontWeight: 600,
+                    color: 'var(--color-text-primary)',
+                    lineHeight: 1,
+                }}>
+                    {Math.round(weather.temperature_c)}°C
+                </div>
+                <div style={{
+                    fontSize: '0.8rem',
+                    color: 'var(--color-text-secondary)',
+                    marginTop: '0.2rem',
+                }}>
+                    {weather.condition_text} · {Math.round(weather.wind_speed_kmh)} km/h
+                </div>
+            </div>
+        </div>
+    )
+}
