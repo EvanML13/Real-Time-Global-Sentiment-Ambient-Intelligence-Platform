@@ -21,3 +21,32 @@ export interface RegionWeather {
     condition_text: string
     is_day: boolean
 }
+
+export interface PulseItem {
+    id: number
+    title: string 
+    url: string
+    score: number
+    type: string
+}
+
+export interface RegionPulseData {
+    region_id: number
+    region_name: string
+    sentiment: {
+        valence: number
+        arousal: number 
+        dominant_emotion: string
+        sample_count: number
+        recorded_at: string
+    } | null
+    weather: {
+        temperature_c: number
+        condition_text: string
+        wind_speed_kmh: number
+        is_day: boolean
+        updated_at: string
+    } | null
+    top_threads: PulseItem[]
+    top_headlines: PulseItem[]
+}
