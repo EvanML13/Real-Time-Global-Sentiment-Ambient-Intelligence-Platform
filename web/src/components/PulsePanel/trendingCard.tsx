@@ -1,4 +1,5 @@
 import type { PulseItem } from "../../types/region";
+import { LuArrowUpRight } from "react-icons/lu";
 
 interface TrendingCardProps {
     item: PulseItem
@@ -53,14 +54,12 @@ export function TrendingCard({ item, index }: TrendingCardProps) {
 
             {/* Score Badge Shown For Threads */}
             {item.type === 'thread' && item.score > 0 && (
-                <span style={{
-                    fontSize: '0.7rem',
-                    color: 'var(-color-accent-gold)',
-                    alignSelf: 'flex-start',
-                    whiteSpace: 'nowrap',
-                }}>
-                    ↑ {item.score}
-                </span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '2px', alignSelf: 'flex-start' }}>
+                    <LuArrowUpRight size={12} color='var(--color-accent-gold)' />
+                    <span style={{ fontSize: '0.7rem', color: 'var(-color-accent-gold)' }}>
+                        {item.score}
+                    </span>
+                </div>
             )}
         </a>
     )

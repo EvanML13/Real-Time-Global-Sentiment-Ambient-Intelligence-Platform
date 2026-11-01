@@ -4,6 +4,7 @@ import { useUIStore } from "../../store/uiStore";
 import type { RegionPulseData } from "../../types/region";
 import { WeatherCard } from "./weatherCard";
 import { TrendingCard } from "./trendingCard";
+import { LuX, LuArrowUpRight } from 'react-icons/lu';
 
 function SectionLabel ({ children }: { children: React.ReactNode }) {
     return(
@@ -135,7 +136,7 @@ export function PlusePanel() {
                     onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-text-primary)')}
                     onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-text-tertiary)')}
                 >
-                    x
+                    <LuX size={16} />
                 </button>
             </div>
 
