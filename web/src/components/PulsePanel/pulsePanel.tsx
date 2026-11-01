@@ -46,7 +46,7 @@ function MoodBar ({ label, value, color }: { label: string, value: number; color
     )
 }
 
-export function PlusePanel() {
+export function PulsePanel() {
 
     const selectedRegionId = useUIStore((s) => s.selectedRegionId)
     const setSelectedRegionId = useUIStore((s) => s.setSelectedRegionId)
